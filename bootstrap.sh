@@ -85,7 +85,7 @@ sudo chmod +x ~/netbeans.sh
 bash ~/netbeans.sh
 fi
 
-#netbeans-dev-201507240001
+sudo cp ~/dotfilesDev/config/netbeans.desktop /usr/share/applications/
 
 
 
