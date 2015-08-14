@@ -94,3 +94,6 @@ alias proyectos="cd ~/proyectos"
 
 #Tmux
 alias tmuxdev='~/dotfilesDev/tmux/tmuxdev'
+alias t4='~/dotfilesDev/tmux/t4'
+alias tkill='tmux kill-session'
+alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'

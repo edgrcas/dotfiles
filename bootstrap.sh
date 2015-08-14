@@ -3,24 +3,47 @@
 
 cd ~
 
+if [ ! -x /usr/bin/terminator ] ; then                                
+    notify-send "Instalando Terminator"
+    sudo apt-get install terminator --yes
+fi
+
 if [ ! -x /usr/bin/ngrep ] ; then                                
-	notify-send "Instalando ngrep"
-	sudo apt-get install ngrep --yes
+    notify-send "Instalando ngrep"
+    sudo apt-get install ngrep --yes
 fi
 
 if [ ! -x /usr/bin/vim ] ; then                                
-	notify-send "Instalando Vim"
-	sudo apt-get install vim --yes
+    notify-send "Instalando Vim"
+    sudo apt-get install vim --yes
 fi
 
+if [ ! -x ~/.vimrc ] ; then                                
+    notify-send "Vinculando Vimrc"
+    rm -rf ~/.vimrc
+    ln -s ~/dotfilesDev/config/.vimrc ~/.vimrc
+fi
+
+if [ ! -x /usr/bin/ruby ] ; then                                
+sudo apt-get install build-essential
+sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    ruby-dev mercurial
+fi
+
+cd ~
+bash ~/dotfilesDev/config/install_vim.sh
+curl http://j.mp/spf13-vim3 -L -o - | sh
+
 if [ ! -x /usr/bin/curl ] ; then                                
-	notify-send "Instalando Curl"
-	sudo apt-get install curl --yes
+    notify-send "Instalando Curl"
+    sudo apt-get install curl --yes
 fi
 
 if [ ! -x /usr/bin/zsh ] ; then                                
-	notify-send "Instalando Zsh"
-	sudo apt-get install zsh --yes
+    notify-send "Instalando Zsh"
+    sudo apt-get install zsh --yes
 fi
 
 if [ ! -f ~/.zshrc ]; then
@@ -40,9 +63,9 @@ if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     ln -s ~/dotfilesDev/config/.zshrc ~/.zshrc
 fi
 
-if [ ! -x /usr/bin/virtualbox ] ; then                                
-	notify-send "Instalando VirtualBox"
-	sudo apt-get install virtualbox --yes
+if [ ! -x /usr/bin/VBoxClient ] ; then                                
+    notify-send "Instalando VirtualBox"
+    sudo apt-get install virtualbox --yes
 fi
 
 #PROYECTO Y DESARROLLO
@@ -50,9 +73,7 @@ fi
 if [ ! -d ~/proyectos ]; then
     mkdir ~/proyectos
     cp ~/dotfilesDev/config/Vagrantfile ~/proyectos
-    mkdir ~/proyectos/public 
-    cp ~/dotfilesDev/config/index.php ~/proyectos/public
-    #sudo echo "\n192.168.33.10 proyectos.dev" >> /etc/host
+    cp ~/dotfilesDev/config/index.php ~/proyectos/proyectos.dev/public
 fi
 
 if [ ! -x /usr/bin/vagrant ] ; then   
@@ -68,24 +89,23 @@ if [ ! -x /usr/bin/vagrant ] ; then
 fi
 
 if [ ! -x /usr/bin/tmux ] ; then                                
-notify-send "Instalando tmux"
-sudo apt-get update
-sudo apt-get install -y python-software-properties software-properties-common
-sudo add-apt-repository -y ppa:pi-rho/dev
-sudo apt-get update
-sudo apt-get install -y tmux=2.0-1~ppa1~t --yes
-rm -rf ~/.tmux.conf
-ln -s ~/dotfilesDev/config/.tmux.conf ~/.tmux.conf
+    notify-send "Instalando tmux"
+    sudo apt-get update
+    sudo apt-get install -y python-software-properties software-properties-common
+    sudo add-apt-repository -y ppa:pi-rho/dev
+    sudo apt-get update
+    sudo apt-get install -y tmux=2.0-1~ppa1~t --yes
+    rm -rf ~/.tmux.conf
+    ln -s ~/dotfilesDev/config/.tmux.conf ~/.tmux.conf
+    [ -z "$TMUX"  ] && export TERM=xterm-256color
 fi
 
-if [ ! -x /usr/bin/netbeans ] ; then   
-sudo apt-get autoremove
-wget -O ~/netbeans.sh http://bits.netbeans.org/download/trunk/nightly/latest/bundles/netbeans-trunk-nightly-201507240001-php-linux-x64.sh
-sudo chmod +x ~/netbeans.sh
-bash ~/netbeans.sh
+if [ ! -d ~/netbeans-8.0.2 ]; then
+    sudo apt-get autoremove -y
+    wget -O ~/netbeans.sh http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-8.0.2-php-linux.sh
+    sudo chmod +x ~/netbeans.sh
+    bash ~/netbeans.sh
 fi
-
-sudo cp ~/dotfilesDev/config/netbeans.desktop /usr/share/applications/
 
 
 

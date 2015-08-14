@@ -3,45 +3,54 @@
 
 Vagrant.configure("2") do |config|
 
-   config.vm.box = "scotch/box"
-   config.vm.network "private_network", ip: "192.168.33.10"
-   config.vm.hostname = "devbox"
+    config.vm.box = "scotch/box"
+    config.vm.network "private_network", ip: "192.168.33.10"
+    config.vm.hostname = "devbox"
     config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
-
-
+    
+    config.vm.provider :virtualbox do |v|
+	v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+	v.customize ["modifyvm", :id, "--memory", "1024"]
+    end    
+    
     config.vm.provision "shell", inline: <<-SHELL
-    	sudo apt-get update
-        sudo apt-get upgrade -y
-        sudo apt-get install php5-xdebug -y
-    	sudo service apache2 restart
+      
+    /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+    /sbin/mkswap /var/swap.1
+    /sbin/swapon /var/swap.1    
 	
-        ## Only thing you probably really care about is right here
-        DOMAINS=("proyectos.local" "dev1.local")
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get install php5-xdebug -y
+    sudo service apache2 restart
+    sudo apt-get install language-pack-es    
 
-        ## Loop through all sites
-        for ((i=0; i < ${#DOMAINS[@]}; i++)); do
+    if [ ! -f ~/.zshrc ]; then
+      apt-get install php-pear php5-dev --yes
+      pecl install mongo --yes
+      touch /etc/php5/cli/mongo.ini
+      echo 'extension=mongo.so' >> /etc/php5/cli/mongo.ini
+      echo 'extension=mongo.so' >> /etc/php5/cli/php.ini
+      echo "extension=mongo.so" | tee /etc/php5/apache2/conf.d/mongo.ini
+    fi
 
-            ## Current Domain
-            DOMAIN=${DOMAINS[$i]}
-
-            echo "Creating directory for $DOMAIN..."
-            mkdir -p /var/www/$DOMAIN/public
-
-            echo "Creating vhost config for $DOMAIN..."
-            sudo cp /etc/apache2/sites-available/scotchbox.local.conf /etc/apache2/sites-available/$DOMAIN.conf
-
-            echo "Updating vhost config for $DOMAIN..."
-            sudo sed -i s,scotchbox.local,$DOMAIN,g /etc/apache2/sites-available/$DOMAIN.conf
-            sudo sed -i s,/var/www/public,/var/www/$DOMAIN/public,g /etc/apache2/sites-available/$DOMAIN.conf
-
-            echo "Enabling $DOMAIN. Will probably tell you to restart Apache..."
-            sudo a2ensite $DOMAIN.conf
-
-            echo "So let's restart apache..."
-            sudo service apache2 restart
-
-        done
-
-    SHELL
-
+    ## Mas Proyectos?, crealos en este array, formato <dominio>:<carpeta-publica>
+    DOMAINS=('proyectos.dev:public')
+    ## Loop through all sites
+    for elt in "${DOMAINS[@]}"; do
+	IFS=: read DOMAIN DIRWEB <<< $elt
+	echo "$DOMAIN*$DIRWEB"
+		echo "Creando un directorio publico para $DOMAIN. Directorio: $DIRWEB"
+		mkdir -p /var/www/$DOMAIN/$DIRWEB
+		echo "Creando configuracion vhost para $DOMAIN"
+		sudo cp /etc/apache2/sites-available/scotchbox.local.conf /etc/apache2/sites-available/$DOMAIN.conf
+		echo "Actualizando vhost para $DOMAIN"
+		sudo sed -i s,scotchbox.local,$DOMAIN,g /etc/apache2/sites-available/$DOMAIN.conf
+		sudo sed -i s,/var/www/$DIRWEB,/var/www/$DOMAIN/$DIRWEB,g /etc/apache2/sites-available/$DOMAIN.conf
+		echo "Enabling $DOMAIN"
+		sudo a2ensite $DOMAIN.conf
+		echo "Restart Apache ..."
+		sudo service apache2 restart
+	    done
+	SHELL
 end

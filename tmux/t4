@@ -1,0 +1,17 @@
+#tmux kill-session -t t4
+tmux has-session -t t4
+if [ $? != 0  ]
+    then
+    #Ventana 1 | 4 Panes
+    tmux new -s t4 -n MultiPlex -d
+    tmux split-window -v -t t4
+    tmux split-window -h -t t4
+    tmux select-pane -t :.0
+    tmux split-window -h -t t4
+    
+    #Ventana 2 | Full Editor
+    tmux new-window -t t4 -n Vim
+    tmux send-keys -t t4 'vim' C-m
+    tmux select-window -t 1
+fi
+tmux attach -t t4
