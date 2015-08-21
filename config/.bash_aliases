@@ -97,3 +97,25 @@ alias tmuxdev='~/dotfilesDev/tmux/tmuxdev'
 alias t4='~/dotfilesDev/tmux/t4'
 alias tkill='tmux kill-session'
 alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'
+
+ssh() {
+    if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux"  ]; then
+        tmux rename-window "$(echo $* :call <SNR>113_align()
+        a cut -d . -f 1)"
+        command ssh "$@"
+        tmux set-window-option automatic-rename "on" 1>/dev/null
+    else
+       command ssh "$@"
+    fi
+}
+
+#Docker
+alias dim='docker images'
+alias dco='docker ps -a'
+alias dst='docker stop'
+alias dr='docker run -ti'
+alias dcm='docker commit -m'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias dexe='docker exec -ti'
+alias dcu='docker-compose up'

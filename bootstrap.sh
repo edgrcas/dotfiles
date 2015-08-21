@@ -25,6 +25,7 @@ if [ ! -x ~/.vimrc ] ; then
 fi
 
 if [ ! -x /usr/bin/ruby ] ; then                                
+sudo pt-get -y install python-pip
 sudo apt-get install build-essential
 sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
