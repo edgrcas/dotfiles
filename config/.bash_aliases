@@ -91,10 +91,12 @@ alias zshrc="vim ~/.zshrc && reload"
 
 #Alias Folders
 alias proyectos="cd ~/proyectos"
+alias cdf="cd ~/.doctfiles/config"
+alias df="cd ~/.dotfiles"
 
 #Tmux
-alias tmuxdev='~/dotfilesDev/tmux/tmuxdev'
-alias t4='~/dotfilesDev/tmux/t4'
+alias tmuxdev='~/.dotfiles/tmux/tmuxdev'
+alias t4='~/.dotfiles/tmux/t4'
 alias tkill='tmux kill-session'
 alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'
 
@@ -119,3 +121,6 @@ alias drm='docker rm'
 alias drmi='docker rmi'
 alias dexe='docker exec -ti'
 alias dcu='docker-compose up'
+
+#TREE
+alias treen='tree --charset nwildner'
