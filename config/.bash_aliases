@@ -16,12 +16,15 @@ alias gs='echo " > git status" && git status'
 alias gf='echo " > git fetch -p" &&  git fetch -p'
 alias gm='git commit -m'
 alias gb='echo " > git branch" && git branch'
-alias gbr='echo " > git branch -r" && git branch -r'
+alias gbd='git branch -D'
+alias gbl='git branch -l'
+alias gb='echo " > git branch" && git branch'
+alias gfo='git fetch origin'
 alias gcb='echo "git checkout -b" && git checkout -b'
 alias gc='git checkout'
-alias gac='echo " > git add .; git commit -am " && git add .; git commit -am '
-alias gpo='echo " > " && git pull origin '
+alias gac='echo " > git add .; git commit -am " && git add . && git commit -am '
 alias gpuo='echo " > git push origin " && git push origin '
+alias gpo='git pull origin '
 alias gpom='echo " > git pull origin master" && git pull origin master'
 alias gpuom='echo " > git push origin master" && git push origin master'
 alias gpod='git pull origin development'
@@ -42,6 +45,7 @@ alias gls='git log --pretty=format:"%C(reset)%h %C(yellow)%ad%C(yellow)%d %C(res
 alias gclone='echo " > git clone " && git clone '
 alias gcount='echo " > git shortlog -s -n --all" && git shortlog -s -n --all'
 alias gla='echo " > git log --author" && git log --author '
+#alias gcbo='echo " > Create And Check NewBranch" && git checkout -b '
 
 # alises for off/reset of linux system
 alias off='sudo halt'
@@ -98,7 +102,6 @@ alias df="cd ~/.dotfiles"
 alias tmuxdev='~/.dotfiles/tmux/tmuxdev'
 alias t4='~/.dotfiles/tmux/t4'
 alias tkill='tmux kill-session'
-alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'
 
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux"  ]; then
@@ -110,6 +113,11 @@ ssh() {
        command ssh "$@"
     fi
 }
+
+#Util
+alias fmin='find . -user root -type f -mmin'
+alias cfmin='find . -user root -type f -mmin -100 | tr "\n" " " | xargs -r chown edgar:edgar'
+alias sc='wine /home/edgar/games/SC1.16/StarCraft.exe'
 
 #Docker
 alias dim='docker images'
@@ -124,3 +132,6 @@ alias dcu='docker-compose up'
 
 #TREE
 alias treen='tree --charset nwildner'
+
+#Python
+alias py='python'

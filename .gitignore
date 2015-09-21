@@ -22,6 +22,9 @@ tramp
 # elpa packages
 /elpa/
 
+# orig files
+*.orig
+
 # reftex files
 *.rel
 
@@ -30,3 +33,11 @@ tramp
 
 # cask packages
 .cask/
+
+### Vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
