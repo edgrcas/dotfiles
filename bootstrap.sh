@@ -2,7 +2,7 @@
 
 notificar ()
 {
-	echo "####### $1"
+	echo "####### $1 ###########"
 }
 
 notificar "Hola $USER, vamos a comenzar ..."
@@ -12,31 +12,44 @@ cd ~
 if [ ! -x /usr/bin/terminator ] ; then                                
     notificar "Instalando Terminator"
     sudo apt-get install terminator --yes
+else
+	notificar "[Ok] Terminator" && terminator -v
 fi
 
-if [ ! -x /usr/bin/tree ] ; then                                
+if [ ! -x /usr/bin/tree ] ; then
+    notificar "Instalando Tree"
     sudo apt-get -y install tree
+else
+	notificar "[Ok] Tree" && tree --version
 fi
 
 if [ ! -x /usr/bin/ngrep ] ; then                                
     notificar "Instalando ngrep"
     sudo apt-get install ngrep --yes
+else
+	notificar "[Ok] ngrep"
 fi
 
 if [ ! -x /usr/bin/vim ] ; then                                
     notificar "Instalando Vim"
     sudo apt-get install vim --yes
+else
+	notificar "[Ok] Vim" && vim --version
 fi
 
 if [ ! -x ~/.vimrc ] ; then                                
     notificar "Vinculando Vimrc"
     rm -rf ~/.vimrc
     ln -s ~/.dotfiles/config/.vimrc ~/.vimrc
+else
+	notificar "[Ok] Archivo .vimrc"
 fi
 
 if [ ! -x /usr/bin/emacs ] ; then                                
     notificar "Instalando Emacs"
     sudo apt-get install emacs24 --yes
+else
+	notificar "[Ok] Emacs24"
 fi
 
 if [ ! -x /usr/bin/ruby ] ; then                                
@@ -46,16 +59,22 @@ if [ ! -x /usr/bin/ruby ] ; then
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
     ruby-dev mercurial
+else
+	notificar "[Ok] Ruby"
 fi
 
 if [ ! -x /usr/bin/curl ] ; then                                
     notificar "Instalando Curl"
     sudo apt-get install curl --yes
+else
+	notificar "[Ok] Curl"
 fi
 
 if [ ! -x /usr/bin/zsh ] ; then                                
     notificar "Instalando Zsh"
     sudo apt-get install zsh --yes
+else
+	notificar "[Ok] Zsh"
 fi
 
 if [ ! -f ~/.zshrc ]; then
@@ -63,6 +82,8 @@ if [ ! -f ~/.zshrc ]; then
     curl -L http://install.ohmyz.sh | sh
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
     chsh -s /bin/zsh $USER
+else
+	notificar "[Ok] Asociar Archivo .zshrc"
 fi
 
 if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
@@ -73,44 +94,68 @@ if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     rm -rf ~/.zshrc
     ln -s ~/.dotfiles/config/.bash_aliases ~/.bash_aliases
     ln -s ~/.dotfiles/config/.zshrc ~/.zshrc
+else
+	notificar "[Ok] zsh-syntax-highlighting"
 fi
 
 #PROYECTO Y DESARROLLO
 
-if [ ! -d ~/proyectos ]; then
-    mkdir ~/proyectos
+if [ ! -d ~/Dev/proyectos ]; then
+    notificar "Crear Carpeta Proyecto"
+    mkdir -p ~/Dev/proyectos
+else
+	notificar "[Ok] Creado Carpeta de Proyectos"
+fi
+
+if [ ! -x /usr/bin/python ] ; then                                
+	notificar "Instalando Python"
+    sudo apt-get install -y python-software-properties software-properties-common
+    sudo add-apt-repository -y ppa:pi-rho/dev
+    sudo apt-get update
+else
+	notificar "[Ok] Python"
 fi
 
 if [ ! -x /usr/bin/tmux ] ; then                                
     notificar "Instalando tmux"
-    sudo apt-get update
-    sudo apt-get install -y python-software-properties software-properties-common
-    sudo add-apt-repository -y ppa:pi-rho/dev
-    sudo apt-get update
-    sudo apt-get install -y tmux=2.0-1~ppa1~v --yes
+    sudo apt-get install -y tmux
     rm -rf ~/.tmux.conf
     ln -s ~/.dotfiles/config/.tmux.conf ~/.tmux.conf
     [ -z "$TMUX"  ] && export TERM=xterm-256color
+else
+	notificar "[Ok] Tmux"
 fi
 
 if [ ! -x /usr/bin/java ] ; then   
+    notificar "Instalando Java"
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
     sudo apt-get install oracle-java8-installer
+else
+	notificar "[Ok] Java 8"
 fi
 
 if [ ! -d ~/netbeans-8.0.2 ]; then
+	notificar "Instalando NetBeans 8.0.2"
 	if [ ! -f ~/netbeans.sh ]; then
-            wget -O ~/netbeans.sh http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-8.0.2-php-linux.sh
-            sudo chmod +x ~/netbeans.sh
-    bash ~/netbeans.sh
+		notificar "Obteniendo Basheroo"
+        wget -O ~/netbeans.sh http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-8.0.2-php-linux.sh
+        sudo chmod +x ~/netbeans.sh
+    	bash ~/netbeans.sh
+	else
+		notificar "[Ok] Bash netbeans"
 	fi
+else
+	notificar "[Ok] netBeans8"
 fi
 
 if [ ! -d ~/.prelude ]; then
-rm -rf .emacs.d
-git clone git://github.com/bbatsov/prelude.git ~/.prelude
-ln -s ~/.prelude ~/.emacs.d
+	notificar "Instalando EmacsPrelude"
+	rm -rf .emacs.d
+	git clone git://github.com/bbatsov/prelude.git ~/.prelude
+	ln -s ~/.prelude ~/.emacs.d
+else
+	notificar "[Ok] Prelude"
 fi
 
 #if [ ! -x /usr/bin/docker ] ; then                                
@@ -122,6 +167,40 @@ fi
 if [ ! -d ~/.spf13-vim-3 ]; then
     notificar "Instalando SpfVim"
     curl http://j.mp/spf13-vim3 -L -o - | sh
+else
+	notificar "[Ok] spfVim 3"
 fi
+
+if [ ! -x /usr/bin/ansible ] ; then   
+    notificar "Instalando Ansible"
+	sudo ifconfig | grep inet
+    sudo apt-add-repository ppa:ansible/ansible -y
+    sudo apt-get update && sudo apt-get install ansible -y
+else
+	notificar "[Ok] Ansible"
+fi
+
+if [ ! -x /usr/bin/vagrant ] ; then   
+    notificar "Instalando Vagrant"
+	wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb -O ~/vagrant.deb
+	sudo dpkg -i ~/vagrant.deb
+else
+	notificar "[Ok] Vagrant"
+fi
+
+if [ ! -x /usr/bin/virtualbox ] ; then   
+    notificar "Instalando VirtualBox"
+	sudo apt-get install virtualbox-4.3
+else
+	notificar "[Ok] VirtualBox"
+fi
+
+if [ ! -d ~/Dev/ansible/playbook ]; then
+    notificar "Crear Carpeta PlayBook"
+    mkdir -p ~/Dev/ansible/playbook
+else
+	notificar "[Ok] Creado Carpeta PlayBook"
+fi
+
 
 sudo apt-get autoremove -y

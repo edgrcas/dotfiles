@@ -90,7 +90,7 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias zshrc="vim ~/.zshrc && reload"
 
 #Alias Folders
-alias proyectos="cd ~/proyectos"
+alias pro="cd ~/Dev/proyectos"
 alias cdf="cd ~/.doctfiles/config"
 alias df="cd ~/.dotfiles"
 
@@ -124,3 +124,6 @@ alias dcu='docker-compose up'
 
 #TREE
 alias treen='tree --charset nwildner'
+
+#Ansible
+alias pb="cd ~/Dev/ansible/playbook"
