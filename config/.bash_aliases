@@ -22,9 +22,10 @@ alias gb='echo " > git branch" && git branch'
 alias gfo='git fetch origin'
 alias gcb='echo "git checkout -b" && git checkout -b'
 alias gc='git checkout'
-alias gac='echo " > git add .; git commit -am " && git add . && git commit -am '
+alias gbr='echo " > git branch -r" && git branch -r'
+alias gac='echo " > git add .; git commit -am " && git add .; git commit -am '
+alias gpo='echo " > " && git pull origin '
 alias gpuo='echo " > git push origin " && git push origin '
-alias gpo='git pull origin '
 alias gpom='echo " > git pull origin master" && git pull origin master'
 alias gpuom='echo " > git push origin master" && git push origin master'
 alias gpod='git pull origin development'
@@ -94,7 +95,7 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias zshrc="vim ~/.zshrc && reload"
 
 #Alias Folders
-alias proyectos="cd ~/proyectos"
+alias pro="cd ~/Dev/proyectos"
 alias cdf="cd ~/.doctfiles/config"
 alias df="cd ~/.dotfiles"
 
@@ -102,6 +103,7 @@ alias df="cd ~/.dotfiles"
 alias tmuxdev='~/.dotfiles/tmux/tmuxdev'
 alias t4='~/.dotfiles/tmux/t4'
 alias tkill='tmux kill-session'
+alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'
 
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux"  ]; then
@@ -135,3 +137,6 @@ alias treen='tree --charset nwildner'
 
 #Python
 alias py='python'
+
+#Ansible
+alias pb="cd ~/Dev/ansible/playbook"
