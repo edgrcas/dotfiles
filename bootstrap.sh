@@ -18,7 +18,7 @@ fi
 
 if [ ! -x /usr/bin/tree ] ; then
     notificar "Instalando Tree"
-    sudo apt-get -y install tree
+    sudo apt-get install tree --yes
 else
 	notificar "[Ok] Tree" && tree --version
 fi
@@ -34,7 +34,7 @@ if [ ! -x /usr/bin/vim ] ; then
     notificar "Instalando Vim"
     sudo apt-get install vim --yes
 else
-	notificar "[Ok] Vim" && vim --version
+	notificar "[Ok] Vim"
 fi
 
 if [ ! -x ~/.vimrc ] ; then                                
@@ -74,7 +74,7 @@ if [ ! -x /usr/bin/zsh ] ; then
     notificar "Instalando Zsh"
     sudo apt-get install zsh --yes
 else
-	notificar "[Ok] Zsh"
+    notificar "[Ok] Zsh"
 fi
 
 if [ ! -f ~/.zshrc ]; then
@@ -92,11 +92,14 @@ if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
     notificar "Creando enlaces simbolicos"
     rm -rf ~/.zshrc
-    ln -s ~/.dotfiles/config/.bash_aliases ~/.bash_aliases
     ln -s ~/.dotfiles/config/.zshrc ~/.zshrc
 else
 	notificar "[Ok] zsh-syntax-highlighting"
 fi
+
+rm -rf ~/.bash_aliases
+notificar "[Ok] Asociar .bash_aliases"
+ln -s ~/.dotfiles/config/.bash_aliases ~/.bash_aliases
 
 #PROYECTO Y DESARROLLO
 
@@ -141,7 +144,7 @@ if [ ! -d ~/netbeans-8.0.2 ]; then
 		notificar "Obteniendo Basheroo"
         wget -O ~/netbeans.sh http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-8.0.2-php-linux.sh
         sudo chmod +x ~/netbeans.sh
-    	bash ~/netbeans.sh
+	bash ~/netbeans.sh
 	else
 		notificar "[Ok] Bash netbeans"
 	fi
@@ -158,17 +161,24 @@ else
 	notificar "[Ok] Prelude"
 fi
 
-#if [ ! -x /usr/bin/docker ] ; then                                
-#curl -sSL https://get.docker.com/ | sh
-#sudo usermod -aG docker $USER  
-#sudo service docker start
-#fi
-
-if [ ! -d ~/.spf13-vim-3 ]; then
-    notificar "Instalando SpfVim"
-    curl http://j.mp/spf13-vim3 -L -o - | sh
+if [ ! -x /usr/bin/docker ] ; then
+  notificar "Instalando Docker"
+  curl -sSL https://get.docker.com/ | sh
+  sudo usermod -aG docker $USER  
+  sudo service docker start
 else
-	notificar "[Ok] spfVim 3"
+  notificar "[Ok] Docker"
+fi
+
+if [ ! -x /usr/local/bin/docker-compose ] ; then
+  notificar "Instalando Docker-Compose"
+  sudo su
+  curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  chmod +x /usr/local/bin/docker-compose
+  exit
+  docker-compose --version
+else
+  notificar "[Ok] docker-compose"
 fi
 
 if [ ! -x /usr/bin/ansible ] ; then   
@@ -190,7 +200,7 @@ fi
 
 if [ ! -x /usr/bin/virtualbox ] ; then   
     notificar "Instalando VirtualBox"
-	sudo apt-get install virtualbox-4.3
+	sudo apt-get install virtualbox-4.3 --yes
 else
 	notificar "[Ok] VirtualBox"
 fi
@@ -199,8 +209,16 @@ if [ ! -d ~/Dev/ansible/playbook ]; then
     notificar "Crear Carpeta PlayBook"
     mkdir -p ~/Dev/ansible/playbook
 else
-	notificar "[Ok] Creado Carpeta PlayBook"
+    notificar "[Ok] Creado Carpeta PlayBook"
 fi
 
+if [ ! -d ~/.spf13-vim-3 ]; then
+    notificar "Instalando SpfVim"
+    curl http://j.mp/spf13-vim3 -L -o - | sh
+else
+    notificar "[Ok] spfVim 3"
+fi
+
+notificar "[Ok] Finalizado | Enjoy! | PoweredBy: @Edux87"
 
 sudo apt-get autoremove -y

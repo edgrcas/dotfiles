@@ -96,7 +96,7 @@ alias zshrc="vim ~/.zshrc && reload"
 
 #Alias Folders
 alias pro="cd ~/Dev/proyectos"
-alias cdf="cd ~/.doctfiles/config"
+alias dfc="cd ~/.dotfiles/config"
 alias df="cd ~/.dotfiles"
 
 #Tmux
@@ -132,11 +132,12 @@ alias drmi='docker rmi'
 alias dexe='docker exec -ti'
 alias dcu='docker-compose up'
 
-#TREE
+#Tree
 alias treen='tree --charset nwildner'
+alias tr='tree'
 
 #Python
 alias py='python'
 
 #Ansible
-alias pb="cd ~/Dev/ansible/playbook"
+alias apb="cd ~/Dev/ansible/playbook"

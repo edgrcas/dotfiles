@@ -1,6 +1,7 @@
 #Bienvenidos a mis Dotfiles :D
 Hey! tienes una copia fresh linux Mint 17+, y quieres comenzar rápidamente, no hay problema solo necesitamos instalar git y nuestras credenciales de ssh asi:
 ```
+#!/bin/bash
 sudo apt-get install -y git-core
 ssh-keygen -t rsa -b 4096 -C "email@example.com"
 eval "$(ssh-agent -s)"
@@ -46,9 +47,10 @@ Conoces al poderoso docker?, al solitario vagrant?, no pues!, desde ya te invito
 ### Creando un Box
 En este link dejo los [repos de boxes](http://www.vagrantbox.es/) compatibles con vagrant, una vez seleccionada la caja a utilizar podemos utilizar estos útiles comandos.
 ```
+#!/bin/bash
 # pro es un alias para mi carpeta proyecto ase lo mismo que cd ~/proyectos/
 
-#Ir a mi carpeta proyectos
+# Ir a mi carpeta proyectos
 pro
 
 #Voy a crear una carpeta para alojar mi nuevo proyecto
@@ -73,6 +75,17 @@ Ya tenemos nuestra box, casi lista, veremos que existe un archivo llamado Vagran
 # vi: set ft=ruby :
 Vagrant.configure(2) do |config|
   config.vm.box = "centos7"
+  config.ssh.insert_key = false
+  config.vm.hostname = "lamp"
+
+  config.vm.provider :virtualbox do |v|
+  v.name = "Centos7Lamp"
+  v.memory = 512
+  v.cpus = 2
+  v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  v.customize ["modifyvm", :id, "--ioapic", "on"]
+  end
+
   config.vm.network "private_network", ip: "192.168.33.10"
 end
 ```
@@ -87,6 +100,7 @@ Una de las cosas que mas me gusta de esta herramienta es su basta gama de apps p
 Ansible se puede utilizar en la infraestructura de TI para gestionar y desplegar aplicaciones de software a los nodos remotos. Por ejemplo, digamos que usted necesita para implementar un solo software o varios para 100 de los nodos de un solo comando, aquí ansible entra en el cuadro, con la ayuda de Ansible puede implementar tantos paquetes como aplicaciones a los nodos con un solo mando.
 
 ```
+#!/bin/bash
 # Copiamos nuestras ssh a nuestra Box, espero recuerdes la ip que le pusiste :|, porsiacaso la clave para el user vagrant es 'vagrant' oooooohhhh
 
 ssh-copy-id vagrant@192.168.33.10
@@ -122,6 +136,7 @@ none                      74G   13G   62G  17% /vagrant
 ```
 Existe muchos otros comandos bastante utiles, dejare algunos por aquí:
 ```
+#!/bin/bash
 # Tiempo que se encuetra activo la(s) Caja(s).
 ansible -m command -a "uptime" webservers-local -u vagrant
 
@@ -140,7 +155,5 @@ ansible -m command -a "hostname" webservers-local -u vagrant
 # Ejecutar el Playhook
 ansible-playbook  -s -k -u vagrant playme.yml --ask-sudo-pass
 ```
-
-
 Enjoy!
 
