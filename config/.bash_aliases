@@ -141,3 +141,14 @@ alias py='python'
 
 #Ansible
 alias apb="cd ~/Dev/ansible/playbook"
+
+#Vagrant
+alias vu='vagrant up'
+alias vssh='vagrant ssh'
+alias vst='vagrant status'
+alias vdu='vagrant destroy -f && vagrant up'
+alias vba='vagrant box add'
+alias vbr='vagrant box remove -f'
+alias vd='vagrant destroy -f'
+alias vl='vagrant box list'
+alias vrelo='echo "Apagando Vagrant" && vagrant halt && echo "Encendiendo Vagrant" && vagrant up'
