@@ -111,10 +111,11 @@ else
 fi
 
 if [ ! -x /usr/bin/python ] ; then                                
-	notificar "Instalando Python"
+    notificar "Instalando Python"
     sudo apt-get install -y python-software-properties software-properties-common
     sudo add-apt-repository -y ppa:pi-rho/dev
     sudo apt-get update
+    sudo apt-get install -y python-dev libmysqlclient-dev
 else
 	notificar "[Ok] Python"
 fi
@@ -183,9 +184,10 @@ fi
 
 if [ ! -x /usr/bin/ansible ] ; then   
     notificar "Instalando Ansible"
-	sudo ifconfig | grep inet
+    sudo ifconfig | grep inet
     sudo apt-add-repository ppa:ansible/ansible -y
     sudo apt-get update && sudo apt-get install ansible -y
+    pip install MySQL-python
 else
 	notificar "[Ok] Ansible"
 fi
