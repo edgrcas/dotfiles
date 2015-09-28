@@ -22,9 +22,9 @@ alias gb='echo " > git branch" && git branch'
 alias gfo='git fetch origin'
 alias gcb='echo "git checkout -b" && git checkout -b'
 alias gc='git checkout'
-alias gbr='echo " > git branch -r" && git branch -r'
-alias gac='echo " > git add .; git commit -am " && git add .; git commit -am '
-alias gpo='echo " > " && git pull origin '
+alias gbr='echo "git branch -r" && git branch -r'
+alias gac='echo "git add .; git commit -am " && git add .; git commit -am '
+alias gpo='echo "git pull origin ..." && git pull origin '
 alias gpuo='echo " > git push origin " && git push origin '
 alias gpom='echo " > git pull origin master" && git pull origin master'
 alias gpuom='echo " > git push origin master" && git push origin master'
@@ -46,6 +46,7 @@ alias gls='git log --pretty=format:"%C(reset)%h %C(yellow)%ad%C(yellow)%d %C(res
 alias gclone='echo " > git clone " && git clone '
 alias gcount='echo " > git shortlog -s -n --all" && git shortlog -s -n --all'
 alias gla='echo " > git log --author" && git log --author '
+alias gsa='git stash apply'
 #alias gcbo='echo " > Create And Check NewBranch" && git checkout -b '
 
 # alises for off/reset of linux system
@@ -88,7 +89,8 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 #Utils#
 alias szsh='source ~/.zshrc'
 alias ebal='sudo vim ~/.bash_aliases'
-alias cls='clear'
+alias clis='clear'
+alias cpa='cp -a'
 
 #Reload zsh
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
@@ -97,7 +99,7 @@ alias zshrc="vim ~/.zshrc && reload"
 #Alias Folders
 alias pro="cd ~/Dev/proyectos"
 alias dfc="cd ~/.dotfiles/config"
-alias df="cd ~/.dotfiles"
+alias dotf="cd ~/.dotfiles"
 
 #Tmux
 alias tmuxdev='~/.dotfiles/tmux/tmuxdev'
@@ -120,6 +122,8 @@ ssh() {
 alias fmin='find . -user root -type f -mmin'
 alias cfmin='find . -user root -type f -mmin -100 | tr "\n" " " | xargs -r chown edgar:edgar'
 alias sc='wine /home/edgar/games/SC1.16/StarCraft.exe'
+alias tf='tail -f'
+alias rmr='rm -rf'
 
 #Docker
 alias dim='docker images'
@@ -134,7 +138,9 @@ alias dcu='docker-compose up'
 
 #Tree
 alias treen='tree --charset nwildner'
-alias tr='tree'
+alias tr2='tree -L 2'
+alias tr3='tree -L 3'
+alias tr4='tree -L 4'
 
 #Python
 alias py='python'
@@ -144,9 +150,11 @@ alias apb="cd ~/Dev/ansible/playbook"
 
 #Vagrant
 alias vu='vagrant up'
+alias vini='vagrant init'
+alias vha='vagrant halt'
 alias vssh='vagrant ssh'
 alias vst='vagrant status'
-alias vdu='vagrant destroy -f && vagrant up'
+alias vdu='echo "Apagando ..." && vagrant halt && echo "Destruyendo!!" && vagrant destroy -f && echo "Levantando" && vagrant up'
 alias vba='vagrant box add'
 alias vbr='vagrant box remove -f'
 alias vd='vagrant destroy -f'
