@@ -88,8 +88,8 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 #Utils#
 alias szsh='source ~/.zshrc'
-alias ebal='sudo vim ~/.bash_aliases'
-alias clis='clear'
+alias ebal='vim ~/.bash_aliases'
+alias cls='clear'
 alias cpa='cp -a'
 
 #Reload zsh
@@ -160,3 +160,10 @@ alias vbr='vagrant box remove -f'
 alias vd='vagrant destroy -f'
 alias vl='vagrant box list'
 alias vrelo='echo "Apagando Vagrant" && vagrant halt && echo "Encendiendo Vagrant" && vagrant up'
+
+#Ansible
+
+#apb() {
+#   ansible-playbook -k -u $1 playbook.yml
+#}
+#
