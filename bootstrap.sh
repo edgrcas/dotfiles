@@ -63,6 +63,13 @@ else
 	notificar "[Ok] Ruby"
 fi
 
+if [ ! -x /usr/bin/svn ] ; then                                
+   sudo apt-get install subversion
+   sudo apt-get install libapache2-svn
+else
+	notificar "[Ok] Ruby"
+fi
+
 if [ ! -x /usr/bin/curl ] ; then                                
     notificar "Instalando Curl"
     sudo apt-get install curl --yes
@@ -79,7 +86,7 @@ fi
 
 if [ ! -f ~/.zshrc ]; then
     notificar "Configurando Terminal OhMyZsh"
-    curl -L http://install.ohmyz.sh | sh
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
     chsh -s /bin/zsh $USER
 else
@@ -164,30 +171,30 @@ fi
 
 if [ ! -x /usr/bin/docker ] ; then
   notificar "Instalando Docker"
-  curl -sSL https://get.docker.com/ | sh
-  sudo usermod -aG docker $USER  
-  sudo service docker start
+  #curl -sSL https://get.docker.com/ | sh
+  #sudo usermod -aG docker $USER  
+  #sudo service docker start
 else
   notificar "[Ok] Docker"
 fi
 
-if [ ! -x /usr/local/bin/docker-compose ] ; then
-  notificar "Instalando Docker-Compose"
-  sudo su
-  curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-  chmod +x /usr/local/bin/docker-compose
-  exit
-  docker-compose --version
-else
-  notificar "[Ok] docker-compose"
-fi
+#if [ ! -x /usr/local/bin/docker-compose ] ; then
+  #notificar "Instalando Docker-Compose"
+  #sudo su
+  #curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  #chmod +x /usr/local/bin/docker-compose
+  #exit
+  #docker-compose --version
+#else
+#  notificar "[Ok] docker-compose"
+#fi
 
 if [ ! -x /usr/bin/ansible ] ; then   
     notificar "Instalando Ansible"
     sudo ifconfig | grep inet
     sudo apt-add-repository ppa:ansible/ansible -y
     sudo apt-get update && sudo apt-get install ansible -y
-    pip install MySQL-python
+    sudo pip install MySQL-python
 else
 	notificar "[Ok] Ansible"
 fi
