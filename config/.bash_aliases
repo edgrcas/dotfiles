@@ -126,6 +126,7 @@ alias tf='tail -f'
 alias rmr='rm -rf'
 alias targea='tar -zcvf'
 alias descom='tar -xvzf'
+alias llf='find $1 -type f -exec stat --format "%Y :%y %n" "{}" \; | sort -nr | cut -d: -f2- | head'
 
 #Docker
 alias dim='docker images'
@@ -138,8 +139,10 @@ alias drmi='docker rmi'
 alias dexe='docker exec -ti'
 alias drelo='docker restart'
 alias dcu='docker-compose up'
+alias dps='docker-compose ps'
+alias dcc2='docker rm `docker ps --no-trunc -aq`'
 alias dcc='docker rm -v $(docker ps -a -q -f status=exited) && docker rmi $(docker images -f "dangling=true" -q)'
-
+alias dcs='docker-compose stop'
 #Tree
 alias tr='tree --charset nwildner'
 alias tr2='tree -L 2'
@@ -171,3 +174,4 @@ alias vrelo='echo "Apagando Vagrant" && vagrant halt && echo "Encendiendo Vagran
 #   ansible-playbook -k -u $1 playbook.yml
 #}
 #
+
