@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # ~/.bash_aliases
 
 #aliases for git
@@ -28,17 +29,17 @@ alias gpo='echo "git pull origin ..." && git pull origin '
 alias gpuo='echo " > git push origin " && git push origin '
 alias gpom='echo " > git pull origin master" && git pull origin master'
 alias gpuom='echo " > git push origin master" && git push origin master'
-alias gpod='git pull origin development'
-alias gpuod='git push origin development'
+alias gpod='git pull origin dev'
+alias gpuod='git push origin dev'
 alias gpor='git pull origin releases'
 alias gpuor='git push origin releases'
 #alias gcm='git checkout master'
 alias gcr='git checkout releases'
-alias gcd='git checkout development'
+alias gcd='git checkout dev'
 alias gch='git checkout hotfix'
 alias gcp='git checkout pre'
 alias gmh='git merge hotfix'
-alias gmd='git merge development'
+alias gmd='git merge dev'
 alias gmr='git merge releases'
 alias gmm='git merge master'
 alias gff='git fetch -p && git rebase origin/\$(just_git_branch)'
@@ -85,7 +86,7 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-
+alias hosts='sudo vim /etc/hosts'
 #Utils#
 alias szsh='source ~/.zshrc'
 alias ebal='vim ~/.bash_aliases'
@@ -105,18 +106,9 @@ alias dotf="cd ~/.dotfiles"
 alias tmuxdev='~/.dotfiles/tmux/tmuxdev'
 alias t4='~/.dotfiles/tmux/t4'
 alias tkill='tmux kill-session'
-alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'
 
-ssh() {
-    if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux"  ]; then
-        tmux rename-window "$(echo $* :call <SNR>113_align()
-        a cut -d . -f 1)"
-        command ssh "$@"
-        tmux set-window-option automatic-rename "on" 1>/dev/null
-    else
-       command ssh "$@"
-    fi
-}
+#SC
+alias starcraft='wine /home/edgar/games/SC1.16/StarCraft.exe'
 
 #Util
 alias fmin='find . -user root -type f -mmin'
@@ -143,6 +135,7 @@ alias dps='docker-compose ps'
 alias dcc2='docker rm `docker ps --no-trunc -aq`'
 alias dcc='docker rm -v $(docker ps -a -q -f status=exited) && docker rmi $(docker images -f "dangling=true" -q)'
 alias dcs='docker-compose stop'
+
 #Tree
 alias tr='tree --charset nwildner'
 alias tr2='tree -L 2'
@@ -167,11 +160,4 @@ alias vbr='vagrant box remove -f'
 alias vd='vagrant destroy -f'
 alias vl='vagrant box list'
 alias vrelo='echo "Apagando Vagrant" && vagrant halt && echo "Encendiendo Vagrant" && vagrant up'
-
-#Ansible
-
-#apb() {
-#   ansible-playbook -k -u $1 playbook.yml
-#}
-#
 

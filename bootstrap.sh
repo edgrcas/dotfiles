@@ -16,6 +16,13 @@ else
 	notificar "[Ok] Terminator" && terminator -v
 fi
 
+if [ ! -x /usr/bin/htop ] ; then
+    notificar "Instalando HTOP"
+    sudo apt-get install htop --yes
+else
+	notificar "[Ok] htop"
+fi
+
 if [ ! -x /usr/bin/tree ] ; then
     notificar "Instalando Tree"
     sudo apt-get install tree --yes
@@ -105,6 +112,8 @@ fi
 if [ ! -x /usr/bin/tmux ] ; then                                
     notificar "Instalando tmux"
     sudo apt-get install -y tmux
+
+
     rm -rf ~/.tmux.conf
     ln -s ~/.dotfiles/config/.tmux.conf ~/.tmux.conf
     [ -z "$TMUX"  ] && export TERM=xterm-256color
@@ -114,7 +123,7 @@ fi
 
 if [ ! -x /usr/bin/docker ] ; then
   notificar "Instalando Docker"
-  curl -fsSL https://get.docker.com/ | sh
+  sudo curl -fsSL https://get.docker.com/ | sh
   sudo usermod -aG docker $USER
   sudo service docker start
 else
@@ -123,6 +132,8 @@ fi
 
 if [ ! -x /usr/local/bin/docker-compose ] ; then
   notificar "Instalando Docker-Compose"
+  sudo touch /usr/local/bin/docker-compose
+  sudo chmod 777 /usr/local/bin/docker-compose
   sudo curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
   docker-compose --version

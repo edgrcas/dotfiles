@@ -19,18 +19,15 @@ Si, todos los paquetes están orientados al desarrollo, para eso tenemos:
 - Terminator 0.97
 - Tree 1.6
 - ngrep
+- htop
 - VIM 7.4
-- Emacs24 con Prelude
-- Ruby
 - Curl
 - Zsh y OhMyZsh
 - Python
 - Tmux 2.0
-- Java 1.8
-- NetBeans8
 - spfVim 3
 - Ansible
-- Vagrant 1.7
+- Vagrant 1.8
 
 Además de útiles aliases para movernos rápidamente por el sistema.
 ###Instalación
