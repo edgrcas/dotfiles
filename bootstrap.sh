@@ -9,7 +9,7 @@ notificar "Hola $USER, vamos a comenzar ..."
 
 cd ~
 
-if [ ! -x /usr/bin/terminator ] ; then                                
+if [ ! -x /usr/bin/terminator ] ; then
     notificar "Instalando Terminator"
     sudo apt-get install terminator --yes
 else
@@ -30,21 +30,21 @@ else
 	notificar "[Ok] Tree" && tree --version
 fi
 
-if [ ! -x /usr/bin/ngrep ] ; then                                
+if [ ! -x /usr/bin/ngrep ] ; then
     notificar "Instalando ngrep"
     sudo apt-get install ngrep --yes
 else
 	notificar "[Ok] ngrep"
 fi
 
-if [ ! -x /usr/bin/vim ] ; then                                
+if [ ! -x /usr/bin/vim ] ; then
     notificar "Instalando Vim"
     sudo apt-get install vim --yes
 else
 	notificar "[Ok] Vim"
 fi
 
-if [ ! -x ~/.vimrc ] ; then                                
+if [ ! -x ~/.vimrc ] ; then
     notificar "Vinculando Vimrc"
     rm -rf ~/.vimrc
     ln -s ~/.dotfiles/config/.vimrc ~/.vimrc
@@ -52,14 +52,14 @@ else
 	notificar "[Ok] Archivo .vimrc"
 fi
 
-if [ ! -x /usr/bin/curl ] ; then                                
+if [ ! -x /usr/bin/curl ] ; then
     notificar "Instalando Curl"
     sudo apt-get install curl --yes
 else
 	notificar "[Ok] Curl"
 fi
 
-if [ ! -x /usr/bin/zsh ] ; then                                
+if [ ! -x /usr/bin/zsh ] ; then
     notificar "Instalando Zsh"
     sudo apt-get install zsh --yes
 else
@@ -99,7 +99,7 @@ else
 	notificar "[Ok] Creado Carpeta de Proyectos"
 fi
 
-if [ ! -x /usr/bin/python ] ; then                                
+if [ ! -x /usr/bin/python ] ; then
     notificar "Instalando Python"
     sudo apt-get install -y python-software-properties software-properties-common
     sudo add-apt-repository -y ppa:pi-rho/dev
@@ -109,7 +109,28 @@ else
 	notificar "[Ok] Python"
 fi
 
-if [ ! -x /usr/bin/tmux ] ; then                                
+if [ ! -x /usr/bin/meld ] ; then
+    notificar "Instalando meld"
+    sudo apt-get install -y meld
+else
+	notificar "[Ok] Meld"
+fi
+
+if [ ! -x /usr/bin/gitg ] ; then
+    notificar "Instalando gitg"
+    sudo apt-get install -y gitg
+else
+	notificar "[Ok] gitg"
+fi
+
+if [ ! -x /usr/bin/planner ] ; then
+    notificar "Instalando gitg"
+    sudo apt-get install -y planner
+else
+	notificar "[Ok] planner"
+fi
+
+if [ ! -x /usr/bin/tmux ] ; then
     notificar "Instalando tmux"
     sudo apt-get install -y tmux
 
@@ -141,7 +162,7 @@ else
   notificar "[Ok] docker-compose"
 fi
 
-if [ ! -x /usr/bin/ansible ] ; then   
+if [ ! -x /usr/bin/ansible ] ; then
     notificar "Instalando Ansible"
     sudo apt-get install software-properties-common
     sudo apt-add-repository ppa:ansible/ansible
@@ -151,7 +172,7 @@ else
 	notificar "[Ok] Ansible"
 fi
 
-if [ ! -x /usr/bin/vagrant ] ; then   
+if [ ! -x /usr/bin/vagrant ] ; then
     notificar "Instalando Vagrant"
 	wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb -O ~/vagrant.deb
 	sudo dpkg -i ~/vagrant.deb
@@ -159,7 +180,7 @@ else
 	notificar "[Ok] Vagrant"
 fi
 
-if [ ! -x /usr/bin/virtualbox ] ; then   
+if [ ! -x /usr/bin/virtualbox ] ; then
     notificar "Instalando VirtualBox"
 	sudo apt-get install virtualbox --yes
 else
