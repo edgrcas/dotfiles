@@ -99,7 +99,7 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias zshrc="vim ~/.zshrc && reload"
 
 #Alias Folders
-alias pro="cd ~/Dev/proyectos"
+alias pro="cd ~/Projects"
 alias dfc="cd ~/.dotfiles/config"
 alias dotf="cd ~/.dotfiles"
 

@@ -1,11 +1,55 @@
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*'
+zstyle :compinstall filename '~/.zshrc'
+
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+
+#### ANTIGEN ####
+# .zshrc Source Basic
+
+# source ~/.antigen/antigen.zsh
+#
+# # Load the oh-my-zsh's library.
+# antigen use oh-my-zsh
+#
+# # Bundles from the default repo (robbyrussell's oh-my-zsh).
+# #antigen bundle git
+# antigen bundle rsync
+# antigen bundle heroku
+# antigen bundle pip
+# antigen bundle lein
+# antigen bundle python
+# antigen bundle history
+# antigen bundle command-not-found
+#
+# # Third Party
+# antigen bundle kennethreitz/autoenv
+#
+# # Syntax highlighting bundle.
+# antigen bundle zsh-users/zsh-completions src
+# antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+# antigen theme https://github.com/carloscuesta/materialshell  /zsh/materialshell-dark
+# antigen theme eendroroy/alien alien
+# antigen theme gnzh
+# antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
+
+# Tell antigen that you're done.
+# antigen apply
+
+#### ANTIGEN ####
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="kphoen"
+ ZSH_THEME="wedisagree"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -82,9 +126,3 @@ source ~/.bash_aliases
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/ecastaneda/Documents/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables shell command completion for gcloud.
-source '/home/ecastaneda/Documents/google-cloud-sdk/completion.zsh.inc'
