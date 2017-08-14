@@ -75,16 +75,6 @@ else
 	notificar "[Ok] Creado Carpeta de Proyectos"
 fi
 
-if [ ! -x /usr/bin/python ] ; then
-	notificar "Instalando Python"
-	sudo apt-get install -y python-software-properties software-properties-common
-	sudo add-apt-repository -y ppa:pi-rho/dev
-	sudo apt-get update
-	sudo apt-get install -y python-dev libmysqlclient-dev
-else
-	notificar "[Ok] Python"
-fi
-
 if [ ! -x /usr/bin/meld ] ; then
 	notificar "Instalando meld"
 	sudo apt-get install -y meld
@@ -116,17 +106,6 @@ if [ ! -x /usr/bin/tmux ] ; then
 	[ -z "$TMUX"  ] && export TERM=xterm-256color
 else
 	notificar "[Ok] Tmux"
-fi
-
-
-if [ ! -x /usr/bin/ansible ] ; then
-	notificar "Instalando Ansible"
-	sudo apt-get install software-properties-common
-	sudo apt-add-repository ppa:ansible/ansible
-	sudo apt-get update
-	sudo apt-get install ansible --yes
-else
-	notificar "[Ok] Ansible"
 fi
 
 ### OMY ZSH

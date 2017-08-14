@@ -146,6 +146,7 @@ alias tr4='tree -L 4'
 
 #Python
 alias py='python'
+alias py3='python3'
 
 #Ansible
 alias apb="cd ~/Dev/ansible/playbook"
