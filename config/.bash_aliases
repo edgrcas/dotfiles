@@ -137,6 +137,7 @@ alias dps='docker-compose ps'
 alias dcc2='docker rm `docker ps --no-trunc -aq`'
 alias dcc='docker rm -v $(docker ps -a -q -f status=exited) && docker rmi $(docker images -f "dangling=true" -q)'
 alias dcs='docker-compose stop'
+alias dsa='docker stop $(docker ps -a -q)'
 
 #Tree
 alias tr='tree --charset nwildner'
@@ -164,3 +165,5 @@ alias vd='vagrant destroy -f'
 alias vl='vagrant box list'
 alias vrelo='echo "Apagando Vagrant" && vagrant halt && echo "Encendiendo Vagrant" && vagrant up'
 
+# Jekyll
+alias jekyll='docker run -v $(pwd):/src/site:rw -p 4000:4000 -it jekyll-generator'
