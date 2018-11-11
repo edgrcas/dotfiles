@@ -166,4 +166,5 @@ alias vl='vagrant box list'
 alias vrelo='echo "Apagando Vagrant" && vagrant halt && echo "Encendiendo Vagrant" && vagrant up'
 
 # Jekyll
-alias jekyll='docker run -v $(pwd):/src/site:rw -p 4000:4000 -it jekyll-generator'
+alias jekyll='docker run -v $(pwd):/src/site:rw -p 4000:4000 -it edaniel15/jekyll-generator'
+alias aws='~/.local/bin/aws'
