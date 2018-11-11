@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ~/.bash_aliases
-
+export PATH=~/.local/bin:$PATH
 #aliases for git
 
 alias gam='echo " > git commit -am" && git commit -am '
